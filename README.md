@@ -17,7 +17,7 @@ if __name__ == "__main__":
 ```
 
 ### Demo
-
+![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/123.png?raw=true)
 
 ### Why make this script?
 因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
