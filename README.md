@@ -6,6 +6,19 @@ pytesseract
 selenium  
 Pillow  
 
+### Use
+下载chromedriver, 并将它放到环境变量中
+下载tesseract, 并将它放到环境变量中
+```
+from get_index import main
+
+if __name__ == "__main__":
+    main('张艺兴', '2018-01-01', '2018-09-01')
+```
+
+### Demo
+
+
 ### Why make this script?
 因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
 
@@ -32,7 +45,7 @@ Pillow
  
 ### Tip
 - 虽然使用了selenium，但是没有发送任何网络请求
-- 过程中没有产生额外的文件，html是使用js操作dom加载的,图片是走的io流
+- 过程中没有产生额外的文件，html是使用js操作dom渲染的,图片是走的io流
 - js加密代码中的变量和过程是由后端随机生成，所以不能写死，所以每次请求将会自动抽取js加密代码
 - 这个脚本没有实现自动获取cookie的功能, 如需要多账号抓取, 请自行实现
 
