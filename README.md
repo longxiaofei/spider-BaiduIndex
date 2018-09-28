@@ -1,6 +1,16 @@
 ### Why make this script?
 因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
 
+### Thinking
+看了一下github关于百度指数的项目，分为两种:  
+- 第一种是通过selenium操作浏览器进入搜索页，等待浏览器加载完所有资源后  
+通过执行PPval.ppt,PPval.res2来获取res和res2的值  
+再进行后面一系列的操作
+- 第二种是通过selenium操作浏览器进入搜索页，通过模拟鼠标移动的形式，  
+不断定位指数图片出现的位置，截取图片进行识别  
+  
+我们将改进第一种方法  
+
 ### Requirements
 python3.5+
   
@@ -25,16 +35,6 @@ if __name__ == "__main__":
 
 ### Demo
 ![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
-
-### Thinking
-看了一下github关于百度指数的项目，分为两种:  
-- 第一种是通过selenium操作浏览器进入搜索页，等待浏览器加载完所有资源后  
-通过执行PPval.ppt,PPval.res2来获取res和res2的值  
-再进行后面一系列的操作
-- 第二种是通过selenium操作浏览器进入搜索页，通过模拟鼠标移动的形式，  
-不断定位指数图片出现的位置，截取图片进行识别  
-  
-我们将改进第一种方法  
   
 ### Process
 1. 通过requests向搜索页发送请求,获取搜索页的html
