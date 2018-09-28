@@ -13,11 +13,13 @@ Pillow
 from get_index import main
 
 if __name__ == "__main__":
-    main('张艺兴', '2018-01-01', '2018-09-01')
+    demo = main('张艺兴', '2018-01-01', '2018-09-01')
+    for data in demo:
+        print(data)
 ```
 
 ### Demo
-![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/123.png?raw=true)
+![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
 
 ### Why make this script?
 因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
