@@ -5,7 +5,7 @@
 from urllib.parse import urlencode, unquote
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from PIL import Image, ImageOps
+from PIL import Image
 from config import COOKIES
 import pytesseract
 import datetime
