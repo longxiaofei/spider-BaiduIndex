@@ -202,7 +202,7 @@ def main(keyword, startdate, enddate):
         res1 = get_res1(html)
         res2 = get_res2(html)
         res3_datas = get_res3_datas(res1, res2, startdate, enddate)
-        for res3_data in res3_datas[]:
+        for res3_data in res3_datas:
             sleep_fuc()
             res3 = res3_data['res3']
             date = res3_data['date']
