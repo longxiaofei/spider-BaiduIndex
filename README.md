@@ -23,6 +23,14 @@ Pillow
 下载chromedriver, 并将它放到环境变量中  
 下载tesseract, 并将它放到环境变量中  
 单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中  
+找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits  
+```
+tessedit_char_whitelist 0123456789.-
+```
+改为
+```
+tessedit_char_whitelist 0123456789.
+```
 之后在demo.py写入以下代码
 ```
 from get_index import main
@@ -54,4 +62,4 @@ if __name__ == "__main__":
 - 这个脚本没有实现自动获取cookie的功能, 如需要多账号抓取, 请自行实现
 
 ### Todo
-upload code
+tesseract的识别正确率大约在85%左右  
