@@ -32,6 +32,7 @@ tessedit_char_whitelist 0123456789.-
 tessedit_char_whitelist 0123456789.
 ```  
 也可以不用改  
+  
 之后在demo.py写入以下代码
 ```
 from get_index import main
