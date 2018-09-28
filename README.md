@@ -7,8 +7,10 @@ selenium
 Pillow  
 
 ### Use
-下载chromedriver, 并将它放到环境变量中
-下载tesseract, 并将它放到环境变量中
+下载chromedriver, 并将它放到环境变量中  
+下载tesseract, 并将它放到环境变量中  
+单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中  
+之后在demo.py写入以下代码
 ```
 from get_index import main
 
