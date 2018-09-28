@@ -1,3 +1,6 @@
+### Why make this script?
+因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
+
 ### Requirements
 python3.5+
   
@@ -22,9 +25,6 @@ if __name__ == "__main__":
 
 ### Demo
 ![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
-
-### Why make this script?
-因为有个傻子既然要去淘宝买百度指数的数据，听说一条好几块钱呢
 
 ### Thinking
 看了一下github关于百度指数的项目，分为两种:  
