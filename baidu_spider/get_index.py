@@ -176,7 +176,7 @@ def parse_index_img(img_byte, width_list):
     for width in width_list:
         all_width += int(width)
     im = Image.open(io.BytesIO(img_byte)).convert('RGB')
-    im = im.crop((0,8,all_width*2,32))
+    im = im.crop((0,4,all_width,16))
     im = im.resize((im.size[0]*6, im.size[1]*6))
     # im.save('test.png')
     result = pytesseract.image_to_string(im, config='digits')
