@@ -66,7 +66,7 @@ if __name__ == "__main__":
 - 这个脚本没有实现自动获取cookie的功能, 如需要多账号抓取, 请自行实现
 
 ### Error
-在本机测试时，chromedriver是按照1px=2px来显示的，不清楚是不是chromedriver的问题。  
+在本机测试时，chromedriver是按照1px=2px来显示的,目前不清楚是什么问题导致的。  
 目前代码已改成1px=1px来截取指数图片了。
 
 ### Todo
