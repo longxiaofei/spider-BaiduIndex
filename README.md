@@ -46,15 +46,19 @@ if __name__ == "__main__":
 ![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
   
 ### Process
-1. ~~通过requests向搜索页发送请求,获取搜索页的html~~
-2. ~~解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码~~
-3. ~~使用selenium,加载下载到本地的Raphael.js(res2加密必须的js，而这个代码必须在浏览器环境下运行),并运行第2步得到~~
+~~1. 通过requests向搜索页发送请求,获取搜索页的html~~  
+~~2. 解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码~~  
+~~3. 使用selenium,加载下载到本地的Raphael.js(res2加密必须的js，而这个代码必须在浏览器环境下运行),并运行第2步得到~~  
 ~~的res2加密代码，得到res2~~  
-4. ~~使用res1、res2、开始日期、结束日期构造获取res3的url，并发送请求~~
-5. ~~解析第4步得到的html,获取res3列表~~
-6. ~~使用res1、res2、res3构造url获取百度指数的html代码~~
-7. ~~使用浏览器渲染第6步得到的html代码,并进行截取~~
-8. ~~使用pytesseract识别图片,得到指数~~
+~~4. 使用res1、res2、开始日期、结束日期构造获取res3的url，并发送请求~~  
+~~5. 解析第4步得到的html,获取res3列表~~  
+~~6. 使用res1、res2、res3构造url获取百度指数的html代码~~  
+~~7. 使用浏览器渲染第6步得到的html代码,并进行截取~~  
+~~8. 使用pytesseract识别图片,得到指数~~  
+1. 获取时间范围，以300天为一个时间段，将时间分为若干段
+2. 模拟鼠标操作修改百度指数的时间范围
+3. 模拟鼠标移动，获取渲染后的html数据
+4. 重复2、3步，直到获取全部数据
  
 ### Tip
 - ~~虽然使用了selenium，但是没有使用selenium发送任何网络请求~~
