@@ -20,16 +20,16 @@
 ### Requirements
 python3.5+
   
-requests  
-pytesseract  
+~~requests~~  
+~~pytesseract~~  
 selenium  
-Pillow  
+~~Pillow~~  
 
 ### Use
 下载chromedriver, 并将它放到环境变量中  
-下载tesseract, 并将它放到环境变量中~~
+~~下载tesseract, 并将它放到环境变量中~~
 单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中  
-找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits~~
+~~找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits~~~~
  
   
 之后在demo.py写入以下代码
@@ -46,25 +46,25 @@ if __name__ == "__main__":
 ![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
   
 ### Process
-1. 通过requests向搜索页发送请求,获取搜索页的html
-2. 解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码
-3. 使用selenium,加载下载到本地的Raphael.js(res2加密必须的js，而这个代码必须在浏览器环境下运行),并运行第2步得到
-的res2加密代码，得到res2~~
-4. 使用res1、res2、开始日期、结束日期构造获取res3的url，并发送请求
-5. 解析第4步得到的html,获取res3列表
-6. 使用res1、res2、res3构造url获取百度指数的html代码
-7. 使用浏览器渲染第6步得到的html代码,并进行截取
-8. 使用pytesseract识别图片,得到指数
+1. ~~通过requests向搜索页发送请求,获取搜索页的html~~
+2. ~~解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码~~
+3. ~~使用selenium,加载下载到本地的Raphael.js(res2加密必须的js，而这个代码必须在浏览器环境下运行),并运行第2步得到~~
+~~的res2加密代码，得到res2~~  
+4. ~~使用res1、res2、开始日期、结束日期构造获取res3的url，并发送请求~~
+5. ~~解析第4步得到的html,获取res3列表~~
+6. ~~使用res1、res2、res3构造url获取百度指数的html代码~~
+7. ~~使用浏览器渲染第6步得到的html代码,并进行截取~~
+8. ~~使用pytesseract识别图片,得到指数~~
  
 ### Tip
-- 虽然使用了selenium，但是没有使用selenium发送任何网络请求
-- 过程中没有产生额外的文件，html是使用js操作dom渲染的,图片是走的io流
-- js加密代码中的变量和过程是由后端随机生成，所以不能写死，所以每次请求将会自动抽取js加密代码
-- 这个脚本没有实现自动获取cookie的功能, 如需要多账号抓取, 请自行实现
+- ~~虽然使用了selenium，但是没有使用selenium发送任何网络请求~~
+- ~~过程中没有产生额外的文件，html是使用js操作dom渲染的,图片是走的io流~~
+- ~~js加密代码中的变量和过程是由后端随机生成，所以不能写死，所以每次请求将会自动抽取js加密代码~~
+- ~~这个脚本没有实现自动获取cookie的功能, 如需要多账号抓取, 请自行实现~~
 
 ### Error
-在本机测试时，chromedriver是按照1px=2px来显示的,目前不清楚是什么问题导致的。  
-目前代码已改成1px=1px来截取指数图片了。
+~~在本机测试时，chromedriver是按照1px=2px来显示的,目前不清楚是什么问题导致的。~~  
+~~目前代码已改成1px=1px来截取指数图片了。~~  
 
 ### Todo
 更新新版百度指数的抓取流程  
