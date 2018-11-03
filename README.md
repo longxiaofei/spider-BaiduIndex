@@ -15,7 +15,7 @@
   
 ~~我们将改进第一种方法~~
   
-2018-11-02：百度指数改版了，我们不改进第一种方法了！通过模拟鼠标移动的方式来获取在数据，真香~~
+2018-11-02：百度指数改版了，我们不改进第一种方法了！通过模拟鼠标移动的方式来获取数据，真香~~
 
 ### Requirements
 python3.5+
@@ -27,21 +27,14 @@ Pillow
 
 ### Use
 下载chromedriver, 并将它放到环境变量中  
-下载tesseract, 并将它放到环境变量中  
+~~下载tesseract, 并将它放到环境变量中~~
 单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中  
-找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits  
-```
-tessedit_char_whitelist 0123456789.-
-```
-改为
-```
-tessedit_char_whitelist 0123456789.
-```  
-也可以不用改  
+~~找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits~~
+ 
   
 之后在demo.py写入以下代码
 ```
-from get_index import main
+from new_get_index import main
 
 if __name__ == "__main__":
     demo = main('张艺兴', '2018-01-01', '2018-09-01')
@@ -53,10 +46,10 @@ if __name__ == "__main__":
 ![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
   
 ### Process
-1. 通过requests向搜索页发送请求,获取搜索页的html
-2. 解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码
+~~1. 通过requests向搜索页发送请求,获取搜索页的html~~
+~~2. 解析第1步中的html,可以直接得到res1的值,并且通过一些小技巧拿到res2的js加密代码
 3. 使用selenium,加载下载到本地的Raphael.js(res2加密必须的js，而这个代码必须在浏览器环境下运行),并运行第2步得到
-的res2加密代码，得到res2
+的res2加密代码，得到res2~~
 4. 使用res1、res2、开始日期、结束日期构造获取res3的url，并发送请求
 5. 解析第4步得到的html,获取res3列表
 6. 使用res1、res2、res3构造url获取百度指数的html代码
