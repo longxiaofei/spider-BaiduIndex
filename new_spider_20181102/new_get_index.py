@@ -48,25 +48,38 @@ def get_time_range_list(startdate, enddate):
         date_range_list.append((startdate, tempdate, 300))
         startdate = tempdate + datetime.timedelta(days=1)
 
-def adjust_time_range(startdate, enddate):
+def ignore_baidu_index_bug():
+    """
+        百度咨询指数，第一次点击时间会没有响应
+    """
+    time.sleep(1)
+    browser.find_elements_by_xpath('//*[@class="index-date-range-picker"]')[1].click()
+    base_node = browser.find_element_by_xpath('//*[contains(@class, "index-date-range-picker-overlay-box") and \
+        contains(@class, "tether-enabled")]')
+    time.sleep(1.5)
+    base_node.find_element_by_xpath('.//*[@class="primary"]').click()
+
+def adjust_time_range(startdate, enddate, kind):
     """
         ...
     """
     time.sleep(2)
-    browser.find_element_by_xpath('//*[@class="index-date-range-picker"]').click()
-    base_node = browser.find_element_by_xpath('//*[contains(@class, "index-date-range-picker-overlay-box tether-element")]')
+    browser.find_elements_by_xpath('//*[@class="index-date-range-picker"]')[kind].click()
+    base_node = browser.find_element_by_xpath('//*[contains(@class, "index-date-range-picker-overlay-box") and \
+        contains(@class, "tether-enabled")]')
     select_date(base_node, startdate)
     end_date_button = base_node.find_elements_by_xpath('.//*[@class="date-panel-wrapper"]')[1]
     end_date_button.click()
     select_date(base_node, enddate)
 
     base_node.find_element_by_xpath('.//*[@class="primary"]').click()
+    time.sleep(1)
 
 def select_date(base_node, date):
     """
         select date
     """
-    time.sleep(2)
+    time.sleep(2.5)
     base_node = base_node.find_element_by_xpath('.//*[@class="right-wrapper" and not(contains(@style, "none"))]')
     next_year = base_node.find_element_by_xpath('.//*[@aria-label="下一年"]')
     pre_year = base_node.find_element_by_xpath('.//*[@aria-label="上一年"]')
@@ -93,12 +106,12 @@ def select_date(base_node, date):
     time.sleep(1)
     base_node.find_elements_by_xpath('.//table//*[contains(@class, "veui-calendar-day")]')[date.day-1].click()
 
-def loop_move(all_days, keyword):
+def loop_move(all_days, keyword, kind):
     """
         to get the index by moving mouse
     """
     time.sleep(1)
-    chart = browser.find_element_by_xpath('//*[@class="index-trend-chart"]')
+    chart = browser.find_elements_by_xpath('//*[@class="index-trend-chart"]')[kind]
     chart_size = chart.size
     move_step = all_days - 1
     step_px = chart_size['width'] / move_step
@@ -111,15 +124,15 @@ def loop_move(all_days, keyword):
         webdriver.ActionChains(browser).move_to_element_with_offset(
             chart, int(cur_offset['x']), cur_offset['y']).perform()
         cur_offset['x'] += step_px
-        yield get_index(keyword)
+        yield get_index(keyword, chart)
 
-def get_index(keyword):
+def get_index(keyword, base_node):
     """
         get index datas by html
     """
-    date = browser.find_element_by_xpath('//*[@class="index-trend-chart"]/div[2]/div[1]').text
+    date = base_node.find_element_by_xpath('./div[2]/div[1]').text
     date = date.split(' ')[0]
-    index = browser.find_element_by_xpath('//*[@class="index-trend-chart"]/div[2]/div[2]/div[2]').text
+    index = base_node.find_element_by_xpath('./div[2]/div[2]/div[2]').text
     index = index.replace(',', '').strip(' ')
     result = {
         'keyword': keyword,
@@ -128,16 +141,24 @@ def get_index(keyword):
     }
     return result
 
-def main(keyword, startdate, enddate):
+def main(keyword, startdate, enddate, kind=0):
+    """
+        :kind; int, 0:搜索指数, 1:咨询指数
+        搜索指数最早的数据日期为2011-01-01
+        咨询指数最早的数据日期为2017-07-03
+    """
     init_browser()
     get_into_page(keyword)
+    if kind == 1:
+        ignore_baidu_index_bug()
+
     date_range_list = get_time_range_list(startdate, enddate)
     for startdate, enddate, all_days in date_range_list:
-        adjust_time_range(startdate, enddate)
-        for data in loop_move(all_days, keyword):
+        adjust_time_range(startdate, enddate, kind)
+        for data in loop_move(all_days, keyword, kind):
             yield data
     browser.quit()
 
 if __name__ == '__main__':
-    for data in main('张艺兴', '2017-01-01', '2018-09-01'):
+    for data in main('张艺兴', '2017-07-03', '2018-09-01', 0):
         print(data)
