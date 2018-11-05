@@ -30,12 +30,14 @@ selenium
 ~~找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits~~  
  
   
-之后在demo.py写入以下代码
+之后在demo.py写入以下代码  
+kind=0为搜索指数爬取  
+kind=1为资讯指数爬取
 ```
 from new_get_index import main
 
 if __name__ == "__main__":
-    demo = main('张艺兴', '2018-01-01', '2018-09-01')
+    demo = main('张艺兴', '2018-01-01', '2018-09-01', kind=0)
     for data in demo:
         print(data)
 ```
@@ -73,3 +75,5 @@ no todo
 
 ### update
 2018/11/03 更新
+2018/11/03 增加资讯指数爬取
+
