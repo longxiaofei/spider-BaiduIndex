@@ -74,7 +74,8 @@ if __name__ == "__main__":
 ~~目前代码已改成1px=1px来截取指数图片了。~~  
 
 ### Todo
-no todo
+编写不需要selenium，直接发送http请求获取数据的版本(之前嫌麻烦，没有去调试js代码)  
+PS：这儿有一个大佬写好的版本，支持多cookies和异步爬取,[https://github.com/Hexmagic/BaiduIndexNew](Hexmagic/BaiduIndexNew)
 
 ### update
 2018/11/03 更新  
