@@ -116,17 +116,18 @@ def loop_move(all_days, keyword, kind):
     move_step = all_days - 1
     step_px = chart_size['width'] / move_step
     cur_offset = {
-        'x': 1,
+        'x': step_px,
         'y': chart_size['height'] - 50
     }
 
-    for i in range(all_days):
+    webdriver.ActionChains(browser).move_to_element_with_offset(
+        chart, 1, cur_offset['y']).perform()
+
+    for _ in range(all_days-1):
+        time.sleep(0.05)
         webdriver.ActionChains(browser).move_to_element_with_offset(
             chart, int(cur_offset['x']), cur_offset['y']).perform()
-        if i == 0:
-            cur_offset['x'] = 0
         cur_offset['x'] += step_px
-        time.sleep(0.05)
         yield get_index(keyword, chart)
 
 def get_index(keyword, base_node):
