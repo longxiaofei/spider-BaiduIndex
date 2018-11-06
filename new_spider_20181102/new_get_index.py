@@ -41,11 +41,11 @@ def get_time_range_list(startdate, enddate):
     enddate = datetime.datetime.strptime(enddate, '%Y-%m-%d')
     while 1:
         tempdate = startdate + datetime.timedelta(days=300)
-        if tempdate > enddate:
+        if tempdate >= enddate:
             all_days = (enddate-startdate).days
-            date_range_list.append((startdate, enddate, all_days))
+            date_range_list.append((startdate, enddate, all_days+1))
             return date_range_list
-        date_range_list.append((startdate, tempdate, 300))
+        date_range_list.append((startdate, tempdate, 301))
         startdate = tempdate + datetime.timedelta(days=1)
 
 def ignore_baidu_index_bug():
@@ -119,11 +119,14 @@ def loop_move(all_days, keyword, kind):
         'x': 1,
         'y': chart_size['height'] - 50
     }
-    for _ in range(all_days):
-        time.sleep(0.05)
+
+    for i in range(all_days):
         webdriver.ActionChains(browser).move_to_element_with_offset(
             chart, int(cur_offset['x']), cur_offset['y']).perform()
+        if i == 0:
+            cur_offset['x'] = 0
         cur_offset['x'] += step_px
+        time.sleep(0.05)
         yield get_index(keyword, chart)
 
 def get_index(keyword, base_node):
