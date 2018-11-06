@@ -122,6 +122,7 @@ def loop_move(all_days, keyword, kind):
 
     webdriver.ActionChains(browser).move_to_element_with_offset(
         chart, 1, cur_offset['y']).perform()
+    yield get_index(keyword, chart)
 
     for _ in range(all_days-1):
         time.sleep(0.05)
