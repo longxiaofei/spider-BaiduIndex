@@ -18,18 +18,21 @@
 ### Requirements
 python3.5+
   
-~~requests~~  
-~~pytesseract~~  
+requests  
 selenium  
 ~~Pillow~~  
+~~pytesseract~~  
 
 ### Use
 下载chromedriver, 并将它放到环境变量中  
+单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中  
 ~~下载tesseract, 并将它放到环境变量中~~  
-单账号抓取：请你打开百度的首页，登录后，将百度首页的cookie复制后，粘贴到config.py中的COOKIES对象中   
 ~~找到tesseract文件夹, tesseract/3.05.02/share/tessdata/configs中的digits~~  
- 
-  
+
+#### baidu_spider
+unable  
+
+#### new_spider_20181102
 之后在demo.py写入以下代码  
 kind=0为搜索指数爬取  
 kind=1为资讯指数爬取
@@ -40,6 +43,29 @@ if __name__ == "__main__":
     demo = main('张艺兴', '2018-01-01', '2018-09-01', kind=0)
     for data in demo:
         print(data)
+```
+  
+#### new_spider_without_selenium
+之后在demo.py写入以下代码  
+```
+from get_index import BaiduIndex
+
+if __name__ == "__main__":
+    """
+    最多一次请求5个关键词
+    """
+    baidu_index = BaiduIndex(['张艺兴', 'lol', '极限挑战', '吃鸡'], '2016-10-01', '2018-10-02')
+    for data in baidu_index('lol', 'all'):
+        print(data)
+
+    # 获取全部5个关键词的全部数据
+    print(baidu_index.result)
+    # 获取1个关键词的全部数据
+    print(baidu_index.result['极限挑战'])
+    # 获取1个关键词的移动端数据
+    print(baidu_index.result['极限挑战']['wise'])
+    # 获取1个关键词的pc端数据
+    print(baidu_index.result['极限挑战']['pc'])
 ```
 
 ### Demo
@@ -74,11 +100,11 @@ if __name__ == "__main__":
 ~~目前代码已改成1px=1px来截取指数图片了。~~  
 
 ### Todo
-编写不需要selenium，直接发送http请求获取数据的版本(之前嫌麻烦，没有去调试js代码)  
-PS：这儿有一个大佬写好的版本，支持多cookies和异步爬取,[Hexmagic/BaiduIndexNew](https://github.com/Hexmagic/BaiduIndexNew)
+no
 
 ### update
 2018/11/03 更新  
 2018/11/05 增加资讯指数爬取  
 2018/11/06 修正获取时间范围方法
+2018/11/07 更新直接发送http请求获取数据的方法[spider_without_selenium](https://github.com/longxiaofei/spider-BaiduIndex/tree/master/new_spider_without_selenium)  
 
