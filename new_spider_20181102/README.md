@@ -17,6 +17,8 @@ if __name__ == "__main__":
         print(data)
 ```
   
+### Demo
+![image](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/bbb.png?raw=true)
   
 ### Process
 1. 获取时间范围，以300天为一个时间段，将时间分为若干段
