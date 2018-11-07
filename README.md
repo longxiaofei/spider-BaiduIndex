@@ -81,10 +81,14 @@ if __name__ == "__main__":
 ~~6. 使用res1、res2、res3构造url获取百度指数的html代码~~  
 ~~7. 使用浏览器渲染第6步得到的html代码,并进行截取~~  
 ~~8. 使用pytesseract识别图片,得到指数~~  
+#### selenium
 1. 获取时间范围，以300天为一个时间段，将时间分为若干段
 2. 模拟鼠标操作修改百度指数的时间范围
 3. 模拟鼠标移动，获取渲染后的html数据
 4. 重复2、3步，直到获取全部数据
+ 
+#### 直接请求
+...  
  
 ### Tip
 - ~~虽然使用了selenium，但是没有使用selenium发送任何网络请求~~
@@ -105,6 +109,6 @@ no
 ### update
 2018/11/03 更新  
 2018/11/05 增加资讯指数爬取  
-2018/11/06 修正获取时间范围方法
+2018/11/06 修正获取时间范围方法  
 2018/11/07 更新直接发送http请求获取数据的方法[spider_without_selenium](https://github.com/longxiaofei/spider-BaiduIndex/tree/master/new_spider_without_selenium)  
 
