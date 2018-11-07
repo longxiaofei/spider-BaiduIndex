@@ -1,3 +1,7 @@
+### Requirements
+python3.5+
+  
+selenium  
 
 ### Use
 下载chromedriver, 并将它放到环境变量中  
