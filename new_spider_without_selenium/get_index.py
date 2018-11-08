@@ -20,19 +20,19 @@ class BaiduIndex:
 
     def __init__(self, keywords, start_date, end_date):
         self._keywords = keywords if isinstance(keywords, list) else keywords.split(',')
-        self.time_range_list = self.get_time_range_list(start_date, end_date)
-        self.all_kind = ['all', 'pc', 'wise']
+        self._time_range_list = self.get_time_range_list(start_date, end_date)
+        self._all_kind = ['all', 'pc', 'wise']
         self.result = {keyword: defaultdict(list) for keyword in self._keywords}
         self.get_result()
 
     def get_result(self):
         """
         """
-        for start_date, end_date in self.time_range_list:
+        for start_date, end_date in self._time_range_list:
             encrypt_datas, uniqid = self.get_encrypt_datas(start_date, end_date)
             key = self.get_key(uniqid)
             for encrypt_data in encrypt_datas:
-                for kind in self.all_kind:
+                for kind in self._all_kind:
                     encrypt_data[kind]['data'] = self.decrypt_func(key, encrypt_data[kind]['data'])
                 self.format_data(encrypt_data)
 
@@ -76,7 +76,7 @@ class BaiduIndex:
             formated_data = {
                 'date': cur_date.strftime('%Y-%m-%d')
             }
-            for kind in self.all_kind:
+            for kind in self._all_kind:
                 formated_data['index'] = data['all']['data'][i]
                 self.result[keyword][kind].append(formated_data)
 
