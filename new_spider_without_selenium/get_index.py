@@ -77,7 +77,7 @@ class BaiduIndex:
                 'date': cur_date.strftime('%Y-%m-%d')
             }
             for kind in self._all_kind:
-                formated_data['index'] = data['all']['data'][i]
+                formated_data['index'] = data[kind]['data'][i]
                 self.result[keyword][kind].append(formated_data)
 
             cur_date += datetime.timedelta(days=1)
