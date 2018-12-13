@@ -68,7 +68,7 @@ class BaiduIndex:
     def format_data(self, data):
         """
         """
-        keyword = data['word']
+        keyword = str(data['word'])
         time_len = len(data['all']['data'])
         start_date = data['all']['startDate']
         cur_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
