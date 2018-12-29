@@ -1,4 +1,4 @@
-from config import COOKIES
+from config import COOKIES, PROVINCE_CODE, CITY_CODE
 from urllib.parse import urlencode
 from collections import defaultdict
 import datetime
@@ -18,10 +18,20 @@ class BaiduIndex:
         百度搜索指数
     """
 
-    def __init__(self, keywords, start_date, end_date):
+    province_code = PROVINCE_CODE
+    city_code = CITY_CODE
+
+    def __init__(self, keywords, start_date, end_date, area=0):
+        """
+            :keywords; list or string '<keyword>,<keyword>'
+            :start_date; string '2018-10-02'
+            :end_date; string '2018-10-02'
+            :area; int, search by cls.province_code/cls.city_code
+        """
         self._keywords = keywords if isinstance(keywords, list) else keywords.split(',')
         self._time_range_list = self.get_time_range_list(start_date, end_date)
         self._all_kind = ['all', 'pc', 'wise']
+        self._area = area
         self.result = {keyword: defaultdict(list) for keyword in self._keywords}
         self.get_result()
 
@@ -45,7 +55,7 @@ class BaiduIndex:
             'word': ','.join(self._keywords),
             'startDate': start_date,
             'endDate': end_date,
-            'area': 0,
+            'area': self._area,
         }
         url = 'http://index.baidu.com/api/SearchApi/index?' + urlencode(request_args)
         html = self.http_get(url)
@@ -127,6 +137,4 @@ class BaiduIndex:
         return ''.join(s).split(',')
 
 if __name__ == '__main__':
-    baidu_index = BaiduIndex(['张艺兴', '黄渤'], '2016-08-11', '2018-09-11')
-    for data in baidu_index('孙红雷', 'all'):
-        print(data)
+    pass
