@@ -16,6 +16,10 @@ headers = {
 class BaiduIndex:
     """
         百度搜索指数
+        :keywords; list or string '<keyword>,<keyword>'
+        :start_date; string '2018-10-02'
+        :end_date; string '2018-10-02'
+        :area; int, search by cls.province_code/cls.city_code
     """
 
     province_code = PROVINCE_CODE
@@ -23,10 +27,6 @@ class BaiduIndex:
 
     def __init__(self, keywords, start_date, end_date, area=0):
         """
-            :keywords; list or string '<keyword>,<keyword>'
-            :start_date; string '2018-10-02'
-            :end_date; string '2018-10-02'
-            :area; int, search by cls.province_code/cls.city_code
         """
         self._keywords = keywords if isinstance(keywords, list) else keywords.split(',')
         self._time_range_list = self.get_time_range_list(start_date, end_date)
