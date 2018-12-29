@@ -4,6 +4,10 @@ if __name__ == "__main__":
     """
     最多一次请求5个关键词
     """
+    # 查看城市和省份的对应代码
+    print(BaiduIndex.city_code)
+    print(BaiduIndex.province_code)
+
     baidu_index = BaiduIndex(['张艺兴', 'lol', '极限挑战', '吃鸡'], '2016-10-01', '2018-10-02')
     for data in baidu_index('lol', 'all'):
         print(data)
@@ -16,4 +20,3 @@ if __name__ == "__main__":
     print(baidu_index.result['极限挑战']['wise'])
     # 获取1个关键词的pc端数据
     print(baidu_index.result['极限挑战']['pc'])
-
