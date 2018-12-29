@@ -14,6 +14,11 @@ if __name__ == "__main__":
     """
     最多一次请求5个关键词
     """
+    
+    # 查看城市和省份的对应代码
+    print(BaiduIndex.city_code)
+    print(BaiduIndex.province_code)
+
     baidu_index = BaiduIndex(['张艺兴', 'lol', '极限挑战', '吃鸡'], '2016-10-01', '2018-10-02')
     for data in baidu_index('lol', 'all'):
         print(data)
@@ -36,6 +41,6 @@ if __name__ == "__main__":
 - 开始时间超过最早的数据日期会导致数据不准确  
   
 ### update 
-2018/12/29 更新查询指定区域百度指数的功能
+2018/12/29 更新查询指定区域百度指数的功能  
 2018/11/07 更新
 
