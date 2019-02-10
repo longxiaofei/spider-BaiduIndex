@@ -83,12 +83,14 @@ class BaiduIndex:
         start_date = data['all']['startDate']
         cur_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
         for i in range(time_len):
-            formated_data = {
-                'date': cur_date.strftime('%Y-%m-%d')
-            }
             for kind in self._all_kind:
-                formated_data['index'] = data[kind]['data'][i]
-                self.result[keyword][kind].append(formated_data.copy())
+                index_datas = data[kind]['data']
+                index_data = index_datas[i] if len(index_datas) != 1 else index_datas[0]
+                formated_data = {
+                    'date': cur_date.strftime('%Y-%m-%d'),
+                    'index': index_data if index_data else '0'
+                }
+                self.result[keyword][kind].append(formated_data)
 
             cur_date += datetime.timedelta(days=1)
 
