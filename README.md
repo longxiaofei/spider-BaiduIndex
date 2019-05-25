@@ -1,5 +1,5 @@
 ## 百度指数爬虫
-2018/11/07 [直接发送http请求获取数据](https://github.com/longxiaofei/spider-BaiduIndex/tree/master/new_spider_without_selenium)
+2018/11/07 [直接发送http请求获取数据](https://github.com/longxiaofei/spider-BaiduIndex/tree/master/new_spider_without_selenium)(待更新)
   
 2018/11/06 [使用selenium模拟浏览操作获取数据](https://github.com/longxiaofei/spider-BaiduIndex/tree/master/new_spider_20181102)(不更新)
   
