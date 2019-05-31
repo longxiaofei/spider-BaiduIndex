@@ -25,15 +25,17 @@ if __name__ == "__main__":
         print(index)
 ```
   
-### Process
-...  
-  
+### Result
+![](https://github.com/longxiaofei/markdown_img/blob/master/spider-baiduindex/aaa.png?raw=true)
+
+
 ### Tip
 - 搜索指数最早的数据日期为2011-01-01
 - 开始时间超过最早的数据日期会导致数据不准确  
 - 初始化类时传入area可以查询指定区域的百度指数, 默认为全国
 - 有些代码不是特别严谨, 有需要请自己DIY
-  
+
+
 ### update 
 2018/02/10 更新格式化数据的方法format_data  
 2018/12/29 更新查询指定区域百度指数的功能  
