@@ -9,6 +9,7 @@ requests==2.19.1
 在demo.py写入以下代码    
 ```
 from get_index import BaiduIndex
+# 可以 from get_extended import BaiduIndex 使用爬取媒体指数和咨询指数的爬虫，然后自己看一下初始化类时的参数 
 
 if __name__ == "__main__":
     """
