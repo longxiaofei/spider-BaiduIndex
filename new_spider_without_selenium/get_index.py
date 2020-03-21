@@ -127,12 +127,20 @@ class BaiduIndex:
         """
         keyword = str(data['word'])
         time_length = len(data['all']['data'])
-        start_date = data['all']['startDate']
-        cur_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
-        for i in range(time_length):
-            for kind in self._all_kind:
-                index_datas = data[kind]['data']
-                index_data = index_datas[i] if len(index_datas) != 1 else index_datas[0]
+        start_date = datetime.datetime.strptime(data['all']['startDate'], '%Y-%m-%d')
+        end_date = datetime.datetime.strptime(data['all']['endDate'], '%Y-%m-%d')
+        date_list = []
+        while start_date <= end_date:
+            date_list.append(start_date)
+            start_date += datetime.timedelta(days=1)
+
+        for kind in self._all_kind:
+            index_datas = data[kind]['data']
+            for i, cur_date in enumerate(date_list):
+                try:
+                    index_data = index_datas[i]
+                except IndexError:
+                    index_data = ''
                 formated_data = {
                     'keyword': keyword,
                     'type': kind,
@@ -140,7 +148,6 @@ class BaiduIndex:
                     'index': index_data if index_data else '0'
                 }
                 yield formated_data
-            cur_date += datetime.timedelta(days=1)
 
     def _http_get(self, url, cookies=COOKIES):
         """
