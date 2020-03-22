@@ -103,6 +103,7 @@ class BaiduIndex:
             'word': ','.join(keywords),
             'startDate': start_date.strftime('%Y-%m-%d'),
             'endDate': end_date.strftime('%Y-%m-%d'),
+            'area': self._area
         }
         url = self._pre_url + urlencode(request_args)
         html = self._http_get(url)
