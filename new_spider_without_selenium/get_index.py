@@ -126,7 +126,6 @@ class BaiduIndex:
             格式化堆在一起的数据
         """
         keyword = str(data['word'])
-        time_length = len(data['all']['data'])
         start_date = datetime.datetime.strptime(data['all']['startDate'], '%Y-%m-%d')
         end_date = datetime.datetime.strptime(data['all']['endDate'], '%Y-%m-%d')
         date_list = []
