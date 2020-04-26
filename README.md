@@ -39,7 +39,7 @@ if __name__ == "__main__":
         print(index)
     
 
-    # 获取百度媒体指数
+    # 获取百度媒体指数
     news_index = ExtendedBaiduIndex(
         keywords=keywords,
         start_date='2018-01-01',
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     for index in baidu_index.get_index():
         print(index)
 
-    # 获取百度咨询指数
+    # 获取百度咨询指数
     feed_index = ExtendedBaiduIndex(
         keywords=keywords,
         start_date='2018-01-01',
