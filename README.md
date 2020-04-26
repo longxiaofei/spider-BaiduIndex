@@ -4,7 +4,7 @@ python3.5+
 requests==2.19.1  
 
 ### Use
-单账号抓取：请你打开百度的首页，登录后，找到www.baidu.com此条GET请求，并复制此条请求的request headers里的cookie，将此cookie粘贴到config.py中的COOKIES对象中  
+单账号抓取：请你打开百度的首页，登录后，找到www.baidu.com此条GET请求，并复制此条请求的request headers里的cookie，将此cookie粘贴到demo.py中的cookies对象中  
   
 在demo.py写入以下代码
 
