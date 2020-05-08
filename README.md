@@ -4,7 +4,7 @@ python3.5+
 requests==2.19.1  
 
 ### Use
-单账号抓取：请你打开百度的首页，登录后，找到www.baidu.com此条GET请求，并复制此条请求的request headers里的cookie，将此cookie粘贴到config.py中的COOKIES对象中  
+单账号抓取：请你打开百度的首页，登录后，找到www.baidu.com此条GET请求，并复制此条请求的request headers里的cookie，将此cookie粘贴到demo.py中的cookies对象中  
   
 在demo.py写入以下代码
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         print(index)
     
 
-    # 获取百度媒体指数
+    # 获取百度媒体指数
     news_index = ExtendedBaiduIndex(
         keywords=keywords,
         start_date='2018-01-01',
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     for index in baidu_index.get_index():
         print(index)
 
-    # 获取百度咨询指数
+    # 获取百度咨询指数
     feed_index = ExtendedBaiduIndex(
         keywords=keywords,
         start_date='2018-01-01',
