@@ -110,4 +110,4 @@ def test_cookies(cookies):
         测试cookie是否可用
     """
     html = http_get('https://www.baidu.com/', cookies)
-    return '退出登录' in html
+    return '退出' in html

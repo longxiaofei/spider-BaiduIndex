@@ -73,7 +73,7 @@ class BaiduIndex:
         :keyword; list, ['1', '2', '3']
         """
         request_args = {
-            'word': ','.join(keywords),
+            'word': json.dumps([[{'name': keyword, 'wordType': 1}] for keyword in keywords]),
             'startDate': start_date.strftime('%Y-%m-%d'),
             'endDate': end_date.strftime('%Y-%m-%d'),
             'area': self.area,
@@ -107,7 +107,7 @@ class BaiduIndex:
                 except IndexError:
                     index_data = ''
                 formated_data = {
-                    'keyword': keyword,
+                    'keyword': json.loads(keyword.replace('\'', '"'))[0]['name'],
                     'type': kind,
                     'date': cur_date.strftime('%Y-%m-%d'),
                     'index': index_data if index_data else '0'
