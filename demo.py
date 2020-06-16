@@ -36,7 +36,7 @@ if __name__ == "__main__":
         cookies=cookies,
         kind='news'
     )
-    for index in baidu_index.get_index():
+    for index in news_index.get_index():
         print(index)
 
     # 获取百度咨询指数
