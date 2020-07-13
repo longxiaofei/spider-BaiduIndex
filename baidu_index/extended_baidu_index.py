@@ -77,8 +77,12 @@ class ExtendedBaiduIndex:
         :end_date; str, 2018-10-01
         :keyword; list, ['1', '2', '3']
         """
+        word_list = [
+            [{'name': keyword, 'wordType': 1} for keyword in keyword_list]
+            for keyword_list in keywords
+        ]
         request_args = {
-            'word': json.dumps([[{'name': keyword, 'wordType': 1}] for keyword in keywords]),
+            'word': json.dumps(word_list),
             'startDate': start_date.strftime('%Y-%m-%d'),
             'endDate': end_date.strftime('%Y-%m-%d'),
             'area': self.area
@@ -111,7 +115,7 @@ class ExtendedBaiduIndex:
             except IndexError:
                 index_data = ''
             formated_data = {
-                'keyword': json.loads(keyword.replace('\'', '"'))[0]['name'],
+                'keyword': [keyword_info['name'] for keyword_info in json.loads(keyword.replace('\'', '"'))],
                 'date': cur_date.strftime('%Y-%m-%d'),
                 'index': index_data if index_data else '0'
             }
