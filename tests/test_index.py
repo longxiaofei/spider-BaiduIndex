@@ -1,4 +1,4 @@
-from baidu_index import BaiduIndex
+from baidux import BaiduIndex
 
 cookies = """xxx"""
 keywords = [['百度', '搜狗']]
@@ -11,3 +11,5 @@ bd = BaiduIndex(
 )
 for index in bd.get_index():
     print(index)
+
+# TODO update tests

@@ -1,3 +1,14 @@
+# Baidux - Python SDK for index and search
+
+* http://index.baidu.com/
+* http://www.baidu.com/
+
+### Install
+
+```shell script
+pip install baidux
+```
+
 ### Usage
 
 打开百度首页，登录后，找到 www.baidu.com 此条 GET 请求，并复制此条请求 request headers 里的 cookies
@@ -5,9 +16,9 @@
 使用样例如下：
 
 ```python
-from baidu_index.utils import test_cookies
-from baidu_index import config
-from baidu_index import BaiduIndex, ExtendedBaiduIndex
+from baidux.utils import test_cookies
+from baidux import config
+from baidux import BaiduIndex, ExtendedBaiduIndex
 
 cookies = """这里放cookie"""
 
