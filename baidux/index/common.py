@@ -1,8 +1,7 @@
-import queue
+from typing import List, Dict, Tuple
+from urllib.parse import urlencode
 import math
 import datetime
-import random
-import time
 import json
 
 import requests
@@ -16,7 +15,7 @@ headers = {
 }
 
 
-def get_time_range_list(startdate, enddate):
+def get_time_range_list(startdate: str, enddate: str) -> List[Tuple[str, str]]:
     """
         切分时间段
     """
@@ -33,32 +32,14 @@ def get_time_range_list(startdate, enddate):
     return date_range_list
 
 
-def split_keywords(keywords: list) -> [list]:
+def split_keywords(keywords: List) -> List[List[str]]:
     """
     一个请求最多传入5个关键词, 所以需要对关键词进行切分
     """
     return [keywords[i*5: (i+1)*5] for i in range(math.ceil(len(keywords)/5))]
 
 
-def get_params_queue(start_date, end_date, keywords):
-    """
-        获取参数队列
-    """
-    params_queue = queue.Queue()
-    keywords_list = split_keywords(keywords)
-    time_range_list = get_time_range_list(start_date, end_date)
-    for start_date, end_date in time_range_list:
-        for keywords in keywords_list:
-            params = {
-                'keywords': keywords,
-                'start_date': start_date,
-                'end_date': end_date
-            }
-            params_queue.put(params)
-    return params_queue
-
-
-def http_get(url, cookies):
+def http_get(url: str, cookies: str) -> str:
     """
         发送get请求, 程序中所有的get都是调这个方法
         如果想使用多cookies抓取, 和请求重试功能
@@ -72,7 +53,7 @@ def http_get(url, cookies):
     return response.text
 
 
-def get_key(uniqid, cookies):
+def get_key(uniqid: str, cookies: str) -> str:
     """
     """
     url = 'http://index.baidu.com/Interface/api/ptbk?uniqid=%s' % uniqid
@@ -82,7 +63,7 @@ def get_key(uniqid, cookies):
     return key
 
 
-def decrypt_func(key, data):
+def decrypt_func(key: str, data: str) -> List[str]:
     """
         数据解密方法
     """
@@ -97,15 +78,39 @@ def decrypt_func(key, data):
     return ''.join(s).split(',')
 
 
-def sleep_func():
-    """
-        sleep方法, 单账号抓取过快, 一段时间内请求会失败
-    """
-    sleep_time = random.choice(range(50, 90)) * 0.1
-    time.sleep(sleep_time)
+def get_encrypt_json(
+    *,
+    start_date: str,
+    end_date: str,
+    keywords: List[List[str]],
+    type: str,
+    area: int,
+    cookies: str
+) -> Dict:
+    pre_url_map = {
+        'search': 'http://index.baidu.com/api/SearchApi/index?',
+        'news': 'http://index.baidu.com/api/NewsApi/getNewsIndex?',
+        'feed': 'http://index.baidu.com/api/FeedSearchApi/getFeedIndex?'
+    }
+
+    pre_url = pre_url_map[type]
+    word_list = [
+        [{'name': keyword, 'wordType': 1} for keyword in keyword_list]
+        for keyword_list in keywords
+    ]
+    request_args = {
+        'word': json.dumps(word_list),
+        'startDate': start_date.strftime('%Y-%m-%d'),
+        'endDate': end_date.strftime('%Y-%m-%d'),
+        'area': area
+    }
+    url = pre_url + urlencode(request_args)
+    html = http_get(url, cookies)
+    datas = json.loads(html)
+    return datas
 
 
-def test_cookies(cookies):
+def test_cookies(cookies: str) -> bool:
     """
         测试cookie是否可用
     """

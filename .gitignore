@@ -6,3 +6,5 @@
 baidux.egg-info/
 build/
 dist/
+
+test.py

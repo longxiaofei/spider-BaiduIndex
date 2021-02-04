@@ -6,7 +6,8 @@
 ### Install
 
 ```shell script
-pip install baidux
+# 暂时不可用
+pip install baidux 
 ```
 
 ### Usage
@@ -16,9 +17,14 @@ pip install baidux
 使用样例如下：
 
 ```python
-from baidux.utils import test_cookies
-from baidux import config
-from baidux import BaiduIndex, ExtendedBaiduIndex
+from baidux.index import (
+    get_feed_index,
+    get_news_index,
+    get_search_index,
+    test_cookies,
+    PROVINCE_CODE,
+    CITY_CODE
+)
 
 cookies = """这里放cookie"""
 
@@ -30,40 +36,34 @@ keywords = [['英雄联盟'], ['冠军杯', '英雄联盟'], ['抑郁', '自杀'
 
 # 获取城市代码, 将代码传入area可以获取不同城市的指数, 不传则为全国
 # 媒体指数不能分地区获取
-print(config.PROVINCE_CODE)
-print(config.CITY_CODE)
+print(PROVINCE_CODE)
+print(CITY_CODE)
 
 # 获取百度搜索指数(地区为山东)
-baidu_index = BaiduIndex(
-    keywords=keywords,
+for index in get_feed_index(
+    keywords_list=keywords,
     start_date='2018-01-01',
-    end_date='2019-01-01',
-    cookies=cookies,
-    area=901
-)
-for index in baidu_index.get_index():
+    end_date='2019-05-01',
+    cookies=cookies
+):
     print(index)
 
 # 获取百度媒体指数
-news_index = ExtendedBaiduIndex(
-    keywords=keywords,
+for index in get_news_index(
+    keywords_list=keywords_list,
     start_date='2018-01-01',
-    end_date='2019-01-01',
-    cookies=cookies,
-    kind='news'
-)
-for index in news_index.get_index():
+    end_date='2019-05-01',
+    cookies=cookies
+):
     print(index)
 
 # 获取百度咨询指数
-feed_index = ExtendedBaiduIndex(
-    keywords=keywords,
+for index in get_feed_index(
+    keywords_list=keywords_list,
     start_date='2018-01-01',
-    end_date='2019-01-01',
-    cookies=cookies,
-    kind='feed'
-)
-for index in feed_index.get_index():
+    end_date='2019-05-01',
+    cookies=cookies
+):
     print(index)
 ```
   
@@ -71,13 +71,12 @@ for index in feed_index.get_index():
 
 ```
 百度搜索指数: {'keyword': ['抑郁', '自杀', '明星'], 'type': 'wise', 'date': '2018-06-10', 'index': '1835'}
-百度媒体指数: {'keyword': ['抑郁', '自杀', '明星'], 'date': '2018-12-29', 'index': '0'}
-百度咨询指数: {'keyword': ['抑郁', '自杀', '明星'], 'date': '2018-12-29', 'index': '1102911'}
+百度媒体指数: {'keyword': ['抑郁', '自杀', '明星'], 'date': '2018-12-29', 'type : 'news', 'index': '0'}
+百度咨询指数: {'keyword': ['抑郁', '自杀', '明星'], 'date': '2018-12-29', 'type': 'feed', 'index': '1102911'}
 ```
 
 ### Tips
 
-- 不限制传入关键词的数量
 - 搜索指数最早的数据日期为2011-01-01
 - 开始时间超过最早的数据日期会导致数据不准确  
 - 初始化类时传入area可以查询指定区域的百度指数, 默认为全国
