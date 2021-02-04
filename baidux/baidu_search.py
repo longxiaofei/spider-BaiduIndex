@@ -61,7 +61,11 @@ class BaiduSearch(object):
                 title = ''.join(item.xpath('.//text()'))
                 href = item.xpath('./@href')[0]
                 url = self.get_url(href)
-                yield {'title': title, 'url': url, 'match': self.domain in url}
+                if not url:
+                    continue
+                if self.domain and self.domain not in url:
+                    continue
+                yield {'title': title, 'url': url}
 
 
 if __name__ == '__main__':
