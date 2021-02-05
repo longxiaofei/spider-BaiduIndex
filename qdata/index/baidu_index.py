@@ -3,6 +3,7 @@ import datetime
 import json
 
 from . import common
+from qdata.errors import QdataError, ErrorCode
 
 ALL_KIND = ['all', 'pc', 'wise']
 
@@ -15,6 +16,8 @@ def get_search_index(
     cookies: str,
     area: int = 0
 ):
+    if len(keywords_list) > 5:
+        raise QdataError(ErrorCode.KEYWORD_LIMITED)
     for start_date, end_date in common.get_time_range_list(start_date, end_date):
         encrypt_json = common.get_encrypt_json(
             start_date=start_date,

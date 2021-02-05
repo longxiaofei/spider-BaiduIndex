@@ -4,6 +4,8 @@ import math
 import datetime
 import json
 
+from qdata.errors import ErrorCode, QdataError
+
 import requests
 
 
@@ -47,15 +49,16 @@ def http_get(url: str, cookies: str) -> str:
     """
     _headers = headers.copy()
     _headers['Cookie'] = cookies
-    response = requests.get(url, headers=_headers, timeout=5)
+    try:
+        response = requests.get(url, headers=_headers, timeout=5)
+    except requests.Timeout:
+        raise QdataError(ErrorCode.NETWORK_ERROR)
     if response.status_code != 200:
-        raise requests.Timeout
+        raise QdataError(ErrorCode.NETWORK_ERROR)
     return response.text
 
 
 def get_key(uniqid: str, cookies: str) -> str:
-    """
-    """
     url = 'http://index.baidu.com/Interface/api/ptbk?uniqid=%s' % uniqid
     html = http_get(url, cookies)
     datas = json.loads(html)
@@ -107,6 +110,10 @@ def get_encrypt_json(
     url = pre_url + urlencode(request_args)
     html = http_get(url, cookies)
     datas = json.loads(html)
+    if datas['status'] == 10000:
+        raise QdataError(ErrorCode.NO_LOGIN)
+    if datas['status'] != 0:
+        raise QdataError(ErrorCode.UNKNOWN)
     return datas
 
 

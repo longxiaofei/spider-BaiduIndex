@@ -2,6 +2,7 @@ from typing import List, Dict
 import datetime
 import json
 
+from qdata.errors import QdataError, ErrorCode
 from . import common
 
 
@@ -50,6 +51,8 @@ def get_extended_index(
     area: int,
     type: str
 ):
+    if len(keywords_list) > 5:
+        raise QdataError(ErrorCode.KEYWORD_LIMITED)
     for start_date, end_date in common.get_time_range_list(start_date, end_date):
         encrypt_json = common.get_encrypt_json(
             start_date=start_date,

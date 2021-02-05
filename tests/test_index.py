@@ -1,4 +1,4 @@
-from baidux.index import get_feed_index, get_news_index, get_search_index
+from qdata.index import get_feed_index, get_news_index, get_search_index
 
 
 keywords_list = [['张艺兴', '汪峰'], ['百度']]

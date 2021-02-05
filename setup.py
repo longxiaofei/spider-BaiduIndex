@@ -12,12 +12,12 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'baidux'
-DESCRIPTION = 'Baidu Python SDK for index and search'
-URL = 'https://github.com/iamsk/baidux'
+NAME = 'qdata'
+DESCRIPTION = 'Python SDK for getting data quickly'
+URL = 'https://github.com/longxiaofei/spider-BaiduIndex'
 EMAIL = 'libra.19951002@gmail.com'
 AUTHOR = 'longxiaofei'
-REQUIRES_PYTHON = '>=3.6.0'
+REQUIRES_PYTHON = '>=3.7.0'
 VERSION = '0.1.1'
 
 # What packages are required for this module to be executed?

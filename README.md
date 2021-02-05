@@ -1,4 +1,4 @@
-# Baidux - Python SDK for index and search
+# Qdata - Python SDK for index and search
 
 * http://index.baidu.com/
 * http://www.baidu.com/
@@ -7,7 +7,7 @@
 
 ```shell script
 # 暂时不可用
-pip install baidux 
+pip install qdata 
 ```
 
 ### Usage
@@ -17,7 +17,7 @@ pip install baidux
 使用样例如下：
 
 ```python
-from baidux.index import (
+from qdata.index import (
     get_feed_index,
     get_news_index,
     get_search_index,
