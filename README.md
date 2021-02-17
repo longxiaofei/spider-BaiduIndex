@@ -32,7 +32,7 @@ cookies = """这里放cookie"""
 # True为配置成功，False为配置不成功
 print(test_cookies(cookies))
 
-keywords = [['英雄联盟'], ['冠军杯', '英雄联盟'], ['抑郁', '自杀', '明星']]
+keywords_list = [['英雄联盟'], ['冠军杯', '英雄联盟'], ['抑郁', '自杀', '明星']]
 
 # 获取城市代码, 将代码传入area可以获取不同城市的指数, 不传则为全国
 # 媒体指数不能分地区获取
@@ -41,7 +41,7 @@ print(CITY_CODE)
 
 # 获取百度搜索指数(地区为山东)
 for index in get_feed_index(
-    keywords_list=keywords,
+    keywords_list=keywords_list,
     start_date='2018-01-01',
     end_date='2019-05-01',
     cookies=cookies
