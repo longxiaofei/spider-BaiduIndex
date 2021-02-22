@@ -67,11 +67,3 @@ def get_all_search(*, keyword: str, cookies: str, domain: str = None) -> Iterato
             domain=domain
         ):
             yield item
-
-
-if __name__ == '__main__':
-    _keyword = '大碗面'
-    _domain = 'dianping.com'
-    _cookies = '这里放cookie'
-    for result in get_all_search(keyword=_keyword, cookies=_cookies, domain=_domain):
-        print(result)

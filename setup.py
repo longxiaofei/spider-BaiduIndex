@@ -22,8 +22,7 @@ VERSION = '0.1.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'requests>=2.19.1',
-    'pytest>=3.6.4',
+    'requests>=2.19.1'
 ]
 
 # What packages are optional?
