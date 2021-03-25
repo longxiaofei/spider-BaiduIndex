@@ -3,7 +3,7 @@
 *.py[cod]
 *$py.class
 *.vscode
-baidux.egg-info/
+qdata.egg-info/
 build/
 dist/
 
