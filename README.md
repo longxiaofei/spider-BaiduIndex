@@ -1,5 +1,12 @@
 # Qdata - Python SDK for index and search
 
+### 为什么给项目改了名
+
+* 想做一个提供更多数据的SDK包,但不一定有时间。。。
+* 老的代码包可以在<a href="https://github.com/longxiaofei/spider-BaiduIndex/tree/old_baiduindex">old_baiduindex</a>里找到
+
+### Data Source
+
 * http://index.baidu.com/
 * http://www.baidu.com/
 
@@ -20,4 +27,4 @@ pip install qdata
 
 ### Changelog
 
-2021/03/25 待上线
+2021/03/25 上线
