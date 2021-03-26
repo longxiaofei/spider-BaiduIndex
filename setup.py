@@ -1,7 +1,7 @@
 import setuptools
 import os
 
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 README = os.path.join(CUR_DIR, "README.md")
@@ -21,7 +21,9 @@ setuptools.setup(
         exclude=["tests", "*.tests", "*.tests.*", "tests.*", "test.py"]
     ),
     install_requires=[
-        "requests>=2.19.1"
+        "requests>=2.19.1",
+        "matplotlib>=3.3.4",
+        "pycrypto>=2.6.1"
     ],
     # entry_points={
     #     'console_scripts': [
