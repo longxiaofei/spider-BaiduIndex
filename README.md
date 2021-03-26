@@ -13,7 +13,7 @@
 ### Install
 
 ```shell script
-pip install -u qdata 
+pip install --upgrade qdata
 ```
 
 ### Examples
@@ -27,7 +27,7 @@ pip install -u qdata
 #### 百度登录(获取百度Cookie)
 `./examples/test_baidu_login.py`
 
-##### log
+##### log
 
 * 目前只提供二维码登录，密码账号登录也可以做，但不做，因为没必要。
 * 幸好工作不做爬虫，心太累了。
