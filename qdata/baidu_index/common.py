@@ -92,6 +92,7 @@ def get_encrypt_json(
 ) -> Dict:
     pre_url_map = {
         'search': 'http://index.baidu.com/api/SearchApi/index?',
+        'live': 'http://index.baidu.com/api/LiveApi/getLive?',
         'news': 'http://index.baidu.com/api/NewsApi/getNewsIndex?',
         'feed': 'http://index.baidu.com/api/FeedSearchApi/getFeedIndex?'
     }
@@ -101,12 +102,18 @@ def get_encrypt_json(
         [{'name': keyword, 'wordType': 1} for keyword in keyword_list]
         for keyword_list in keywords
     ]
-    request_args = {
-        'word': json.dumps(word_list),
-        'startDate': start_date.strftime('%Y-%m-%d'),
-        'endDate': end_date.strftime('%Y-%m-%d'),
-        'area': area
-    }
+    if type == 'live':
+        request_args = {
+            'word': json.dumps(word_list),
+            'region': area
+        }
+    else:
+        request_args = {
+            'word': json.dumps(word_list),
+            'startDate': start_date.strftime('%Y-%m-%d'),
+            'endDate': end_date.strftime('%Y-%m-%d'),
+            'area': area
+        }
     url = pre_url + urlencode(request_args)
     html = http_get(url, cookies)
     datas = json.loads(html)
