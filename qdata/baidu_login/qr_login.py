@@ -135,8 +135,7 @@ def get_cookie_by_qr_login() -> str:
 
     try:
         qrcode_link, sign, callback = get_qrcode_info()
-        # show_qrcode(qrcode_link)
-        input(f"{qrcode_link} \n Press enter when you finished scan qrcode")
+        show_qrcode(qrcode_link)
     except Exception:
         raise QdataError(ErrorCode.GET_QR_FAIL)
 
