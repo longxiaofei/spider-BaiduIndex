@@ -1,4 +1,6 @@
 from typing import Tuple
+from urllib.parse import quote
+from base64 import b64encode
 import json
 import io
 
@@ -20,7 +22,6 @@ HEADERS = {
 }
 
 session = requests.session()
-
 
 def get_qrcode_info() -> Tuple[str, str, str]:
     url = 'https://passport.baidu.com/v2/api/getqrcode'
@@ -113,23 +114,29 @@ def get_exin() -> str:
     url = "https://miao.baidu.com/abdr"
     resp = session.post(url, data=EXIN_TOKEN, headers=HEADERS)
     resp_data = json.loads(resp.text)
-    return "; __yjsv5_shitong={}_{}_{}_{}_{}_{}_{}".format(
-        resp_data['data']['ver'],
-        resp_data['key_id'],
-        resp_data['data']['lid'],
-        resp_data['data']['ret_code'],
-        resp_data['data']['server_time'],
-        resp_data['data']['ip'],
-        resp_data['sign']
-    )
-
+    if isinstance(resp_data['data'], dict):
+        return "; __yjsv5_shitong={}_{}_{}_{}_{}_{}_{}".format(
+            resp_data['data']['ver'],
+            resp_data['key_id'],
+            resp_data['data']['lid'],
+            resp_data['data']['ret_code'],
+            resp_data['data']['server_time'],
+            resp_data['data']['ip'],
+            resp_data['sign']
+        )
+    elif isinstance(resp_data['data'], str):
+        __yjs_st = b64encode(quote("_".join([resp_data['data'], resp_data['key_id'], resp_data['sign']])).encode())
+        return "; __yjs_st=2_{}".format(__yjs_st)
+    else:
+        raise QdataError(ErrorCode.LOGIN_FAIL)
 
 def get_cookie_by_qr_login() -> str:
     print("扫完码记得关闭弹出的图片框...")
 
     try:
         qrcode_link, sign, callback = get_qrcode_info()
-        show_qrcode(qrcode_link)
+        # show_qrcode(qrcode_link)
+        input(f"{qrcode_link} \n Press enter when you finished scan qrcode")
     except Exception:
         raise QdataError(ErrorCode.GET_QR_FAIL)
 
