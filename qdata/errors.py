@@ -14,6 +14,9 @@ class ErrorCode(int, Enum):
     LOGIN_FAIL = 20011
     INDEX_LOGIN_FAIL = 20012
 
+    # 天眼查
+    TYC_COMPANY_COUNT_FAIL = 20020
+
 
 CODE_MSG_MAP = {
     ErrorCode.NO_LOGIN: 'cookies失效，请重新获取cookies',
@@ -24,7 +27,8 @@ CODE_MSG_MAP = {
                                 '对关键词进行切分'),
     ErrorCode.GET_QR_FAIL: "获取二维码失败",
     ErrorCode.LOGIN_FAIL: "百度登录失败",
-    ErrorCode.INDEX_LOGIN_FAIL: "百度指数登录失败"
+    ErrorCode.INDEX_LOGIN_FAIL: "百度指数登录失败",
+    ErrorCode.TYC_COMPANY_COUNT_FAIL: "获取天眼查公司数量失败"
 }
 
 
