@@ -1,7 +1,7 @@
 import setuptools
 import os
 
-VERSION = '0.1.6'
+VERSION = '0.1.7'
 
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 README = os.path.join(CUR_DIR, "README.md")
@@ -23,7 +23,7 @@ setuptools.setup(
     install_requires=[
         "requests>=2.19.1",
         "matplotlib>=3.3.4",
-        "pycrypto>=2.6.1"
+        "pycryptodome>=3.10.1"
     ],
     # entry_points={
     #     'console_scripts': [

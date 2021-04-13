@@ -16,6 +16,7 @@
 ### Install
 
 ```shell script
+pip uninstall pycrypto  # 避免与pycryptodome冲突
 pip install --upgrade qdata
 ```
 
