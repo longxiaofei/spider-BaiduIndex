@@ -1,7 +1,7 @@
 import setuptools
 import os
 
-VERSION = '0.1.7'
+VERSION = '0.1.8'
 
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 README = os.path.join(CUR_DIR, "README.md")

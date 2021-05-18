@@ -1,24 +1,17 @@
 from typing import List, Dict
-import os
 import json
 
-cur_dir_path = os.path.dirname(os.path.abspath(__file__))
+from .base_datas import AREA, CATEGORY
 
 
 def get_category_data() -> List[Dict]:
     """分类数据"""
-    data_file = os.path.join(cur_dir_path, "base_datas", "category")
-    with open(data_file, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data
+    return json.loads(CATEGORY)
 
 
 def get_area_data() -> List[Dict]:
     """地区数据"""
-    data_file = os.path.join(cur_dir_path, "base_datas", "area")
-    with open(data_file, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data
+    return json.loads(AREA)
 
 
 def get_reg_status() -> List[str]:
