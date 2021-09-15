@@ -119,6 +119,8 @@ def get_encrypt_json(
     datas = json.loads(html)
     if datas['status'] == 10000:
         raise QdataError(ErrorCode.NO_LOGIN)
+    if datas["status"] == 10001:
+        raise QdataError(ErrorCode.REQUEST_LIMITED)
     if datas['status'] != 0:
         raise QdataError(ErrorCode.UNKNOWN)
     return datas

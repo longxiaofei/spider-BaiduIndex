@@ -8,6 +8,7 @@ class ErrorCode(int, Enum):
     # 百度指数
     NO_LOGIN = 20000
     KEYWORD_LIMITED = 20001
+    REQUEST_LIMITED = 20002
 
     # 百度的登录
     GET_QR_FAIL = 20010
@@ -25,6 +26,7 @@ CODE_MSG_MAP = {
     ErrorCode.KEYWORD_LIMITED: ('关键词最多传递5个, '
                                 '可以使用`from qdata.baidu_index.common import split_keywords`,'
                                 '对关键词进行切分'),
+    ErrorCode.REQUEST_LIMITED: "该账号请求过于频繁, 请降低请求频率",
     ErrorCode.GET_QR_FAIL: "获取二维码失败",
     ErrorCode.LOGIN_FAIL: "百度登录失败",
     ErrorCode.INDEX_LOGIN_FAIL: "百度指数登录失败",
