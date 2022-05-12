@@ -1,9 +1,11 @@
 from typing import List, Dict, Tuple
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
+from base64 import b64encode
 import math
 import datetime
 import json
 
+from Crypto.Cipher import AES
 from qdata.errors import ErrorCode, QdataError
 
 import requests
@@ -34,6 +36,34 @@ def get_time_range_list(startdate: str, enddate: str) -> List[Tuple[str, str]]:
     return date_range_list
 
 
+def get_cipher_text(keyword: str) -> str:
+    byte_list = [
+        b"\x00", b"\x01", b"\x02", b"\x03", b"\x04", b"\x05", b"\x06", b"\x07",
+        b"\x08", b"\x09", b"\x0a", b"\x0b", b"\x0c", b"\x0d", b"\x0e", b"\x0f"
+    ]
+    # 这个数是从acs-2057.js里写死的，但这个脚本请求时代时间戳，不确定是不是一个动态变化的脚本
+    start_time = 1652338834776
+    end_time = int(datetime.datetime.now().timestamp()*1000)
+
+    wait_encrypted_data = {
+        "ua": headers["User-Agent"],
+        "url": quote(f"https://index.baidu.com/v2/main/index.html#/trend/{keyword}?words={keyword}"),
+        "platform": "MacIntel",
+        "clientTs": end_time,
+        "version": "2.1.0"
+    }
+    password = b"yyqmyasygcwaiyaa"
+    iv = b"1234567887654321"
+    aes = AES.new(password, AES.MODE_CBC, iv)
+    wait_encrypted_str = json.dumps(wait_encrypted_data).encode()
+    filled_count = 16 - len(wait_encrypted_str) % 16
+    if filled_count > 0:
+        wait_encrypted_str += byte_list[filled_count] * filled_count
+    encrypted_str = aes.encrypt(wait_encrypted_str)
+    cipher_text = f"{start_time}_{end_time}_{b64encode(encrypted_str).decode()}"
+    return cipher_text
+
+
 def split_keywords(keywords: List) -> List[List[str]]:
     """
     一个请求最多传入5个关键词, 所以需要对关键词进行切分
@@ -41,7 +71,7 @@ def split_keywords(keywords: List) -> List[List[str]]:
     return [keywords[i*5: (i+1)*5] for i in range(math.ceil(len(keywords)/5))]
 
 
-def http_get(url: str, cookies: str) -> str:
+def http_get(url: str, cookies: str, cipher_text: str = "") -> str:
     """
         发送get请求, 程序中所有的get都是调这个方法
         如果想使用多cookies抓取, 和请求重试功能
@@ -49,6 +79,8 @@ def http_get(url: str, cookies: str) -> str:
     """
     _headers = headers.copy()
     _headers['Cookie'] = cookies
+    if cipher_text:
+        _headers["Cipher-Text"] = cipher_text
     try:
         response = requests.get(url, headers=_headers, timeout=5)
     except requests.Timeout:
@@ -115,7 +147,8 @@ def get_encrypt_json(
             'area': area
         }
     url = pre_url + urlencode(request_args)
-    html = http_get(url, cookies)
+    cipher_text = get_cipher_text(keywords[0][0])
+    html = http_get(url, cookies, cipher_text=cipher_text)
     datas = json.loads(html)
     if datas['status'] == 10000:
         raise QdataError(ErrorCode.NO_LOGIN)
