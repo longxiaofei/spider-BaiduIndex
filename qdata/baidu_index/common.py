@@ -56,8 +56,8 @@ def get_cipher_text(keyword: str) -> str:
     iv = b"1234567887654321"
     aes = AES.new(password, AES.MODE_CBC, iv)
     wait_encrypted_str = json.dumps(wait_encrypted_data).encode()
-    filled_count = 16 - len(wait_encrypted_str) % 16
-    if filled_count > 0:
+    if len(wait_encrypted_str) % 16:
+        filled_count = 16 - len(wait_encrypted_str) % 16
         wait_encrypted_str += byte_list[filled_count] * filled_count
     encrypted_str = aes.encrypt(wait_encrypted_str)
     cipher_text = f"{start_time}_{end_time}_{b64encode(encrypted_str).decode()}"
