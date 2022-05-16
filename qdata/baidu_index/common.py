@@ -155,7 +155,7 @@ def get_encrypt_json(
     if datas["status"] == 10001:
         raise QdataError(ErrorCode.REQUEST_LIMITED)
     if datas['status'] != 0:
-        raise QdataError(ErrorCode.UNKNOWN)
+        raise QdataError(ErrorCode.UNKNOWN, str(datas))
     return datas
 
 
