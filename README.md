@@ -71,3 +71,4 @@ for keywords in split_keywords(keywords_list):
 * 2021/04/13 添加天眼查高级搜索公司数数据
 * 2021/05/18 修正打包问题
 * 2022/05/12 百度指数添加Cipher-Text(不确定部分逻辑)
+* 2022/05/16 一些小的改动
