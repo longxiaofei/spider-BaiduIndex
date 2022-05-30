@@ -39,7 +39,8 @@ def get_time_range_list(startdate: str, enddate: str) -> List[Tuple[str, str]]:
 def get_cipher_text(keyword: str) -> str:
     byte_list = [
         b"\x00", b"\x01", b"\x02", b"\x03", b"\x04", b"\x05", b"\x06", b"\x07",
-        b"\x08", b"\x09", b"\x0a", b"\x0b", b"\x0c", b"\x0d", b"\x0e", b"\x0f"
+        b"\x08", b"\x09", b"\x0a", b"\x0b", b"\x0c", b"\x0d", b"\x0e", b"\x0f",
+        b"\x10"
     ]
     # 这个数是从acs-2057.js里写死的，但这个脚本请求时代时间戳，不确定是不是一个动态变化的脚本
     start_time = 1652338834776
@@ -56,9 +57,8 @@ def get_cipher_text(keyword: str) -> str:
     iv = b"1234567887654321"
     aes = AES.new(password, AES.MODE_CBC, iv)
     wait_encrypted_str = json.dumps(wait_encrypted_data).encode()
-    if len(wait_encrypted_str) % 16:
-        filled_count = 16 - len(wait_encrypted_str) % 16
-        wait_encrypted_str += byte_list[filled_count] * filled_count
+    filled_count = 16 - len(wait_encrypted_str) % 16
+    wait_encrypted_str += byte_list[filled_count] * filled_count
     encrypted_str = aes.encrypt(wait_encrypted_str)
     cipher_text = f"{start_time}_{end_time}_{b64encode(encrypted_str).decode()}"
     return cipher_text

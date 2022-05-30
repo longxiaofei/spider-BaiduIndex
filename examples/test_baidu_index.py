@@ -6,7 +6,7 @@ from qdata.baidu_index import (
 )
 
 
-keywords_list = [['张艺兴', '汪峰'], ['百度']]
+keywords_list = [['张艺兴', '汪峰'], ['百度'], ['gucci','古驰']]
 cookies = """xxx"""
 
 

@@ -72,3 +72,4 @@ for keywords in split_keywords(keywords_list):
 * 2021/05/18 修正打包问题
 * 2022/05/12 百度指数添加Cipher-Text(不确定部分逻辑)
 * 2022/05/16 一些小的改动
+* 2022/05/30 修正百度指数加密逻辑
