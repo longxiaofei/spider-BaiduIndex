@@ -82,7 +82,7 @@ def http_get(url: str, cookies: str, cipher_text: str = "") -> str:
     if cipher_text:
         _headers["Cipher-Text"] = cipher_text
     try:
-        response = requests.get(url, headers=_headers, timeout=5)
+        response = requests.get(url, headers=_headers, timeout=30)
     except requests.Timeout:
         raise QdataError(ErrorCode.NETWORK_ERROR)
     if response.status_code != 200:
@@ -165,3 +165,34 @@ def test_cookies(cookies: str) -> bool:
     """
     html = http_get('https://www.baidu.com/', cookies)
     return '退出' in html
+
+
+def check_keywords_exists(keywords: List[str], cookies: str) -> Dict[str, List[str]]:
+    if len(keywords) > 15:
+        raise QdataError(ErrorCode.CHECK_KEYWORD_LIMITED)
+
+    new_keywords = []
+    for i in range(0, len(keywords), 3):
+        new_keyword = "+".join(keywords[i: i+3])
+        new_keywords.append(new_keyword)
+
+    base_url = "https://index.baidu.com/api/AddWordApi/checkWordsExists?"
+    params = {
+        "word": ",".join(new_keywords)
+    }
+    url = base_url + urlencode(params)
+    json_data = json.loads(http_get(url, cookies))
+    if json_data["status"] != 0:
+        raise QdataError(ErrorCode.UNKNOWN, json_data.get("message", ""))
+
+    not_exists_keywords = []
+    for item in json_data["data"]["result"]:
+        if item["status"] == 10003:
+            not_exists_keywords.extend(item["word"].split(","))
+
+    exists_keywords = [keyword for keyword in keywords if keyword not in set(not_exists_keywords)]
+
+    return {
+        "not_exists_keywords": not_exists_keywords,
+        "exists_keywords": exists_keywords
+    }

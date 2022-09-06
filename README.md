@@ -25,29 +25,8 @@ pip install --upgrade qdata
 #### 百度指数
 `./examples/test_baidu_index.py`
 
-获取百度指数时不要太暴力，可以参考以下代码，进行百度指数数据的获取
-
-```python
-import time
-
-from qdata.baidu_index import get_search_index
-from qdata.baidu_index.common import split_keywords
-
-
-keywords_list = [['张艺兴', '汪峰'], ['百度'], ['疫情', '杭州'], ['北京', '疫情'], ['猫粮'], ['流浪猫']]
-cookies = """xxx"""
-
-for keywords in split_keywords(keywords_list):
-    for index in get_search_index(
-        keywords_list=keywords,
-        start_date='2018-01-01',
-        end_date='2019-05-01',
-        cookies=cookies
-    ):
-        print(index)
-    time.sleep(15)
-
-```
+可以参考以下代码进行百度指数的获取
+`./examples/baidu_index_best_practice.py`
 
 #### 百度搜索
 `./examples/test_baidu_search.py`
@@ -73,3 +52,4 @@ for keywords in split_keywords(keywords_list):
 * 2022/05/12 百度指数添加Cipher-Text(不确定部分逻辑)
 * 2022/05/16 一些小的改动
 * 2022/05/30 修正百度指数加密逻辑
+* 2022/09/06 添加检查关键词方法、添加最佳实践脚本

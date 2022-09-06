@@ -4,6 +4,7 @@ from qdata.baidu_index import (
     get_search_index,
     get_live_search_index
 )
+from qdata.baidu_index.common import check_keywords_exists
 
 
 keywords_list = [['张艺兴', '汪峰'], ['百度'], ['gucci','古驰']]
@@ -58,6 +59,17 @@ def test_get_live_search_index():
         area=911
     ):
         print(index)
+
+
+def test_check_keywords():
+    test_keywords = [
+        "狗狗国故", "狗狗国的", "狗狗国的的", "狗狗国解决的", "男的女的给你吧大实现",
+        "对你的回复", "电脑看是否", "面对面方法的", "那地方法规股份", "的那女的",
+        "英短", "CF", "新冠疫苗", "极限挑战", "大家大家都"
+    ]
+    result = check_keywords_exists(test_keywords, cookies)
+    print(result["not_exists_keywords"])
+    print(result["exists_keywords"])
 
 
 if __name__ == "__main__":
