@@ -53,3 +53,9 @@ pip install --upgrade qdata
 * 2022/05/16 一些小的改动
 * 2022/05/30 修正百度指数加密逻辑
 * 2022/09/06 添加检查关键词方法、添加最佳实践脚本
+
+
+### Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/longxiaofei/spider-BaiduIndex.svg)](https://starchart.cc/longxiaofei/spider-BaiduIndex)
+
