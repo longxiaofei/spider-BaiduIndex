@@ -9,7 +9,7 @@ from Crypto.Cipher import AES
 
 
 def _padding_pkcs7(m: str) -> str:
-    return m+chr(16-len(m)%16)*(16-len(m)%16)
+    return m+chr(16-len(m) % 16)*(16-len(m) % 16)
 
 
 def get_cur_timestamp() -> int:
