@@ -11,12 +11,14 @@ from qdata.errors import ErrorCode, QdataError
 import requests
 
 
+# pylint: disable=line-too-long
 headers = {
     'Host': 'index.baidu.com',
     'Connection': 'keep-alive',
     'X-Requested-With': 'XMLHttpRequest',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36',
 }
+# pylint: enable=line-too-long
 
 
 def get_time_range_list(startdate: str, enddate: str) -> List[Tuple[str, str]]:
@@ -77,14 +79,14 @@ def http_get(url: str, cookies: str, cipher_text: str = "") -> str:
         如果想使用多cookies抓取, 和请求重试功能
         在这自己添加
     """
-    _headers = headers.copy()
-    _headers['Cookie'] = cookies
+    cur_headers = headers.copy()
+    cur_headers['Cookie'] = cookies
     if cipher_text:
-        _headers["Cipher-Text"] = cipher_text
+        cur_headers["Cipher-Text"] = cipher_text
     try:
-        response = requests.get(url, headers=_headers, timeout=30)
-    except requests.Timeout:
-        raise QdataError(ErrorCode.NETWORK_ERROR)
+        response = requests.get(url, headers=cur_headers, timeout=30)
+    except requests.Timeout as exc:
+        raise QdataError(ErrorCode.NETWORK_ERROR) from exc
     if response.status_code != 200:
         raise QdataError(ErrorCode.NETWORK_ERROR)
     return response.text
