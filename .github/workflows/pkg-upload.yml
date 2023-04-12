@@ -1,0 +1,19 @@
+name: pkg-upload
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Publish
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - run: pip install --upgrade pip
+    - run: pip install setuptools==47.1.0
+    - run: pip install twine==4.0.0
+    - run: pip install wheel==0.36.2
+    - run: python setup.py sdist bdist_wheel && twine upload --repository-url ${{ vars.PYPI_REPOSITORY }} -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPI_PASSWORD }} dist/*
