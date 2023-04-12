@@ -12,4 +12,4 @@ jobs:
         python-version: 3.9
     - run: pip install --upgrade pip
     - run: pip install pylint==2.17.2
-    - run: pylint --fail-under=9.5 qdata
+    - run: pylint --fail-under=9.9 qdata
