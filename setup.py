@@ -1,7 +1,7 @@
 import setuptools
 import os
 
-VERSION = '0.2.4'
+VERSION = "0.3.0"
 
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 README = os.path.join(CUR_DIR, "README.md")
@@ -20,24 +20,20 @@ setuptools.setup(
     packages=setuptools.find_packages(
         exclude=["tests", "*.tests", "*.tests.*", "tests.*", "test.py"]
     ),
-    install_requires=[
-        "requests>=2.19.1",
-        "matplotlib>=3.3.4",
-        "pycryptodome>=3.10.1"
-    ],
+    install_requires=["requests>=2.19.1", "matplotlib>=3.3.4", "pycryptodome>=3.10.1"],
     # entry_points={
     #     'console_scripts': [
     #         'tobe=tobe:main'
     #     ],
     # },
     classifiers=[
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python",
     ],
-    keywords='data sdk',
-    include_package_data=True
+    keywords="data sdk",
+    include_package_data=True,
 )

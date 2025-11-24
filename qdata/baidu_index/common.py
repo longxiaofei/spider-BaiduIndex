@@ -16,7 +16,7 @@ headers = {
     "Host": "index.baidu.com",
     "Connection": "keep-alive",
     "X-Requested-With": "XMLHttpRequest",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
 }
 # pylint: enable=line-too-long
 
@@ -59,22 +59,21 @@ def get_cipher_text(keyword: str) -> str:
         b"\x10",
     ]
     # 这个数是从acs-2057.js里写死的，但这个脚本请求时代时间戳，不确定是不是一个动态变化的脚本
-    start_time = 1652338834776
+    start_time = 1763957172935
     end_time = int(datetime.datetime.now().timestamp() * 1000)
 
+    quoted_keyword = quote(keyword)
     wait_encrypted_data = {
         "ua": headers["User-Agent"],
-        "url": quote(
-            f"https://index.baidu.com/v2/main/index.html#/trend/{keyword}?words={keyword}"
-        ),
+        "url": f"https://index.baidu.com/v2/main/index.html#/trend/{quoted_keyword}?words={quoted_keyword}",
         "platform": "MacIntel",
         "clientTs": end_time,
-        "version": "2.1.0",
+        "version": "1.0.0.5",
     }
-    password = b"yyqmyasygcwaiyaa"
+    password = b"goqwgaiiacaykuwo"
     iv = b"1234567887654321"
     aes = AES.new(password, AES.MODE_CBC, iv)
-    wait_encrypted_str = json.dumps(wait_encrypted_data).encode()
+    wait_encrypted_str = json.dumps(wait_encrypted_data, separators=(",", ":")).encode()
     filled_count = 16 - len(wait_encrypted_str) % 16
     wait_encrypted_str += byte_list[filled_count] * filled_count
     encrypted_str = aes.encrypt(wait_encrypted_str)
@@ -109,7 +108,7 @@ def http_get(url: str, cookies: str, cipher_text: str = "") -> str:
 
 
 def get_key(uniqid: str, cookies: str) -> str:
-    url = "http://index.baidu.com/Interface/api/ptbk?uniqid=%s" % uniqid
+    url = "https://index.baidu.com/Interface/api/ptbk?uniqid=%s" % uniqid
     html = http_get(url, cookies)
     datas = json.loads(html)
     key = datas["data"]
@@ -141,10 +140,10 @@ def get_encrypt_json(
     cookies: str,
 ) -> Dict:
     pre_url_map = {
-        "search": "http://index.baidu.com/api/SearchApi/index?",
-        "live": "http://index.baidu.com/api/LiveApi/getLive?",
-        "news": "http://index.baidu.com/api/NewsApi/getNewsIndex?",
-        "feed": "http://index.baidu.com/api/FeedSearchApi/getFeedIndex?",
+        "search": "https://index.baidu.com/api/SearchApi/index?",
+        "live": "https://index.baidu.com/api/LiveApi/getLive?",
+        "news": "https://index.baidu.com/api/NewsApi/getNewsIndex?",
+        "feed": "https://index.baidu.com/api/FeedSearchApi/getFeedIndex?",
     }
 
     pre_url = pre_url_map[type]
